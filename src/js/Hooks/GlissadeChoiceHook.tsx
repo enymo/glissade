@@ -1,9 +1,10 @@
 import { useDisabled } from "@enymo/react-form-component";
 import _ from "lodash";
 import React, { useCallback, useMemo } from "react";
-import { RegisterOptions, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useCheckboxList } from "../Components/CheckboxList";
 import { useRadioGroup } from "../Components/RadioGroup";
+import { GlissadeChoiceProps } from "../types";
 import { useError } from "./ErrorContext";
 
 export default function useGlissadeChoice({
@@ -14,15 +15,7 @@ export default function useGlissadeChoice({
     disabled,
     checked: checkedProp,
     onChange
-}: {
-    name?: string,
-    options?: RegisterOptions,
-    value?: string | number | boolean,
-    error?: string,
-    disabled?: boolean,
-    checked?: boolean,
-    onChange?: (value: boolean) => void
-}) {
+}: GlissadeChoiceProps) {
     const radioListContext = useRadioGroup();
     const checkboxListContext = useCheckboxList();
     const form = useFormContext();

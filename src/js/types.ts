@@ -21,6 +21,16 @@ export interface GlissadeInputProps {
     step?: number
 }
 
+export interface GlissadeChoiceProps {
+    name?: string,
+    options?: RegisterOptions,
+    value?: string | number | boolean,
+    error?: string,
+    disabled?: boolean,
+    checked?: boolean,
+    onChange?: (value: boolean) => void
+}
+
 export interface CheckboxListProps<T extends string | number> {
     name?: string,
     value?: T[],
