@@ -35,7 +35,7 @@ export default function GlissadeInput({
                     {...props}
                     {...register}
                 >
-                    {props.placeholder && <option value="">{props.placeholder}</option>}
+                    {props.placeholder && <option value="" hidden>{props.placeholder}</option>}
                     {choices?.map(({label, value}) => (
                         <option key={value} value={value}>{label}</option>
                     ))}
