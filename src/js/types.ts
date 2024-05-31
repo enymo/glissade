@@ -3,7 +3,8 @@ import { RegisterOptions } from "react-hook-form";
 
 export interface InputChoice {
     label: React.ReactNode,
-    value: string
+    value: string,
+    disabled?: boolean
 }
 
 export interface GlissadeInputProps {
