@@ -37,7 +37,7 @@ export default function useGlissadeChoice({
             radioListContext?.onChange(value);
         }
         onChangeForm?.(e);
-    }, []);
+    }, [onChange, radioListContext?.onChange, checkboxListContext?.toggle, onChangeForm]);
 
     return {
         checked,
