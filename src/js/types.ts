@@ -9,6 +9,9 @@ export interface InputChoice {
 
 export interface GlissadeInputProps {
     className?: string,
+    textareaClassName?: string,
+    selectClassName?: string,
+    inputClassName?: string,
     type?: React.HTMLInputTypeAttribute | "textarea" | "select",
     name?: string,
     options?: RegisterOptions,
