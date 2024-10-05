@@ -5,13 +5,13 @@ export default function useGlissadeButton({submit = false, loading, disabled, on
     submit?: boolean
     loading?: boolean,
     disabled?: boolean,
-    onClick?: (e: React.MouseEvent) => void | Promise<void>
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void | Promise<void>
 }) {
     const [loadingState, setLoadingState] = useState(false);
     const loadingContext = useLoading();
     const disabledContext = useDisabled();
 
-    const handleClick: React.MouseEventHandler = useCallback(async e => {
+    const handleClick: React.MouseEventHandler<HTMLButtonElement> = useCallback(async e => {
         try {
             setLoadingState(true);
             await onClick?.(e);
