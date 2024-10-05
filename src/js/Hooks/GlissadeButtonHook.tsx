@@ -1,17 +1,17 @@
 import { useDisabled, useLoading } from "@enymo/react-form-component";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
-export default function useGlissadeButton<T extends HTMLElement>({submit = false, loading, disabled, onClick}: {
+export default function useGlissadeButton<T>({submit = false, loading, disabled, onClick}: {
     submit?: boolean
     loading?: boolean,
     disabled?: boolean,
-    onClick?: (e: React.MouseEvent<T>) => void | Promise<void>
+    onClick?: (e: T) => void | Promise<void>
 }) {
     const [loadingState, setLoadingState] = useState(false);
     const loadingContext = useLoading();
     const disabledContext = useDisabled();
 
-    const handleClick: React.MouseEventHandler<T> = useCallback(async e => {
+    const handleClick = useCallback(async (e: T) => {
         try {
             setLoadingState(true);
             await onClick?.(e);
