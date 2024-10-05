@@ -1,6 +1,6 @@
 {
   "name": "@enymo/glissade",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Utility hooks for input creation",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
