@@ -1,20 +1,20 @@
 import { useDisabled, useLoading } from "@enymo/react-form-component";
 import { useCallback, useState } from "react";
 
-export default function useGlissadeButton<T>({submit = false, loading, disabled, onClick}: {
+export default function useGlissadeButton<T extends (...args: any[]) => void | Promise<void>>({submit = false, loading, disabled, onClick}: {
     submit?: boolean
     loading?: boolean,
     disabled?: boolean,
-    onClick?: (e: T) => void | Promise<void>
+    onClick?: T
 }) {
     const [loadingState, setLoadingState] = useState(false);
     const loadingContext = useLoading();
     const disabledContext = useDisabled();
 
-    const handleClick = useCallback(async (e: T) => {
+    const handleClick = useCallback(async (...args: any[]) => {
         try {
             setLoadingState(true);
-            await onClick?.(e);
+            await onClick?.(...args);
         }
         finally {
             setLoadingState(false);
@@ -24,6 +24,6 @@ export default function useGlissadeButton<T>({submit = false, loading, disabled,
     return {
         loading: loading ?? (submit ? loadingContext : undefined) ?? loadingState,
         disabled: disabled ?? disabledContext ?? loading ?? false,
-        onClick: handleClick
+        onClick: handleClick as T
     }
 }
