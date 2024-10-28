@@ -5,7 +5,6 @@ import { useFormContext } from "react-hook-form";
 import { useCheckboxList } from "../Components/CheckboxList";
 import { useRadioGroup } from "../Components/RadioGroup";
 import { GlissadeChoiceProps } from "../types";
-import { useError } from "./ErrorContext";
 
 export default function useGlissadeChoice({
     name,
@@ -20,7 +19,6 @@ export default function useGlissadeChoice({
     const checkboxListContext = useCheckboxList();
     const form = useFormContext();
     const disabledContext = useDisabled();
-    const errorContext = useError();
 
     const { onChange: onChangeForm, ...register } = (name && form && !radioListContext && !checkboxListContext) ? form.register(name, disabled ? undefined : options) : { onChange: undefined };
     
@@ -43,7 +41,7 @@ export default function useGlissadeChoice({
         checked,
         onChange: handleChange,
         disabled: disabled ?? disabledContext ?? false,
-        error: error ?? errorContext ?? (name !== undefined ? _.get(form.formState.errors, name)?.message as string : undefined),
+        error: error ?? (name !== undefined ? _.get(form.formState.errors, name)?.message as string : undefined),
         ...register
     }
 }
