@@ -8,6 +8,7 @@ export interface InputChoice {
 }
 
 export interface GlissadeInputProps {
+    id?: string,
     className?: string,
     textareaClassName?: string,
     selectClassName?: string,
@@ -47,8 +48,8 @@ export interface CheckboxListProps<T extends string | number> {
 
 export interface RadioGroupProps<T extends string | number | boolean> {
     name?: string,
-    value?: T,
-    onChange?: (value: T) => void,
+    value?: T | null,
+    onChange?: (value: T | null) => void,
     options?: RegisterOptions,
     error?: string,
     children: React.ReactNode

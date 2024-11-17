@@ -4,8 +4,8 @@ import { ErrorProvider } from "../Hooks/ErrorContext";
 import { RadioGroupProps } from "../types";
 
 const Context = createContext<{
-    value: string | number | boolean,
-    onChange: (value: string | number | boolean) => void
+    value: string | number | boolean | null,
+    onChange: (value: string | number | boolean | null) => void
 } | undefined>(undefined);
 
 export const useRadioGroup = () => useContext(Context);
@@ -17,7 +17,7 @@ export default function RadioGroup<T extends string | number | boolean>({
     error,
     children
 }: RadioGroupProps<T>) {
-    const {value, onChange, error: formError} = useHybridInput({name, externalValue, externalOnChange, options});
+    const {value, onChange, error: formError} = useHybridInput({name, externalValue, externalOnChange, options, defaultValue: null});
 
     return (
         <Context.Provider value={{ value, onChange: onChange as any }}>
