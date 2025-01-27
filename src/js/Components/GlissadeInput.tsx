@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 import { GlissadeInputProps } from "../types";
 
-export default function GlissadeInput({
+export default function GlissadeInput<T extends string = string>({
     className,
     textareaClassName,
     selectClassName,
@@ -18,9 +18,9 @@ export default function GlissadeInput({
     step,
     choices,
     ...props
-}: GlissadeInputProps) {
+}: GlissadeInputProps<T>) {
     const form = useFormContext();
-    const onChange = useMemo(() => onChangeProp && ((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => onChangeProp(e.target.value)), [onChangeProp]);
+    const onChange = useMemo(() => onChangeProp && ((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => onChangeProp(e.target.value as T)), [onChangeProp]);
     const register = name !== undefined ? form?.register(name, options) : undefined;
     
     switch (type) {

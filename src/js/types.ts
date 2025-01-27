@@ -7,7 +7,7 @@ export interface InputChoice {
     disabled?: boolean
 }
 
-export interface GlissadeInputProps {
+export interface GlissadeInputProps<T extends string = string> {
     id?: string,
     className?: string,
     textareaClassName?: string,
@@ -16,8 +16,8 @@ export interface GlissadeInputProps {
     type?: React.HTMLInputTypeAttribute | "textarea" | "select",
     name?: string,
     options?: RegisterOptions,
-    value?: string,
-    onChange?: (value: string) => void,
+    value?: T,
+    onChange?: (value: T) => void,
     onKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
     onKeyUp?: React.KeyboardEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
     placeholder?: string,
