@@ -1,9 +1,9 @@
 import type React from "react";
 import { RegisterOptions } from "react-hook-form";
 
-export interface InputChoice {
+export interface InputChoice<T extends string> {
     label: React.ReactNode,
-    value: string,
+    value: T,
     disabled?: boolean
 }
 
@@ -22,7 +22,7 @@ export interface GlissadeInputProps<T extends string = string> {
     onKeyUp?: React.KeyboardEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
     placeholder?: string,
     disabled?: boolean,
-    choices?: InputChoice[],
+    choices?: InputChoice<T>[],
     rows?: number,
     min?: number,
     max?: number,
