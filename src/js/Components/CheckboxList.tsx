@@ -14,10 +14,10 @@ export default function CheckboxList<T extends string | number>({
     value: externalValue,
     onChange: externalOnChange,
     options,
-    error,
+    error: externalError,
     children
 }: CheckboxListProps<T>) {
-    const {value, onChange, error: formError} = useHybridInput({name, externalValue, externalOnChange, options, defaultValue: []})
+    const {value, onChange, error} = useHybridInput({name, externalValue, externalOnChange, externalError, options, defaultValue: []})
 
     const handleToggle = useCallback((name: T) => {
         onChange(value.includes(name) ? value.filter(value => value !== name) : [...value, name]);
@@ -25,7 +25,7 @@ export default function CheckboxList<T extends string | number>({
 
     return (
         <Context.Provider value={{ value, toggle: handleToggle as any }}>
-            <ErrorProvider value={error ?? formError?.message}>
+            <ErrorProvider value={error}>
                 {children}
             </ErrorProvider>
         </Context.Provider>

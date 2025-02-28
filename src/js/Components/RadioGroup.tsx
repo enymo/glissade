@@ -14,14 +14,14 @@ export default function RadioGroup<T extends string | number | boolean>({
     value: externalValue,
     onChange: externalOnChange,
     options,
-    error,
+    error: externalError,
     children
 }: RadioGroupProps<T>) {
-    const {value, onChange, error: formError} = useHybridInput({name, externalValue, externalOnChange, options, defaultValue: null});
+    const {value, onChange, error} = useHybridInput({name, externalValue, externalOnChange, externalError, options, defaultValue: null});
 
     return (
         <Context.Provider value={{ value, onChange: onChange as any }}>
-            <ErrorProvider value={error ?? formError?.message}>
+            <ErrorProvider value={error}>
                 {children}
             </ErrorProvider>
         </Context.Provider>
