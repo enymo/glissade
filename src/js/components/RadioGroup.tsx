@@ -1,6 +1,6 @@
 import useHybridInput from "@enymo/react-hybrid-input-hook";
 import React, { createContext, useContext } from "react";
-import { ErrorProvider } from "../Hooks/ErrorContext";
+import { ErrorProvider } from "../hooks/ErrorContext";
 import { RadioGroupProps } from "../types";
 
 const Context = createContext<{

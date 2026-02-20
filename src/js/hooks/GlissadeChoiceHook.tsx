@@ -2,8 +2,8 @@ import { useDisabled } from "@enymo/react-form-component";
 import _ from "lodash";
 import React, { useCallback, useMemo } from "react";
 import { useFormContext } from "react-hook-form";
-import { useCheckboxList } from "../Components/CheckboxList";
-import { useRadioGroup } from "../Components/RadioGroup";
+import { useCheckboxList } from "../components/CheckboxList";
+import { useRadioGroup } from "../components/RadioGroup";
 import { GlissadeChoiceProps } from "../types";
 
 export default function useGlissadeChoice({

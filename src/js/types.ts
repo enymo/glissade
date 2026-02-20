@@ -1,10 +1,23 @@
 import type React from "react";
+import { ReactNode } from "react";
 import { RegisterOptions } from "react-hook-form";
 
-export interface InputChoice<T extends string> {
-    label: React.ReactNode,
+export interface InputChoiceValue<T extends string> {
+    label: ReactNode,
     value: T,
     disabled?: boolean
+}
+
+export interface InputChoiceGroup<T extends string> {
+    label: string,
+    value: InputChoiceValue<T>[],
+    disabled?: boolean
+}
+
+export type InputChoice<T extends string> = InputChoiceValue<T> | InputChoiceGroup<T>;
+
+export function isInputChoiceValue<T extends string>(input: InputChoiceValue<T> | InputChoiceGroup<T>): input is InputChoiceValue<T> {
+    return typeof input.value === "string";
 }
 
 export interface GlissadeInputProps<T extends string = string> {
