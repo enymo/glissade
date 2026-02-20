@@ -1,9 +1,10 @@
 import classNames from "classnames";
-import React, { useMemo } from "react";
+import React, { Ref, useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 import { GlissadeInputProps, isInputChoiceValue } from "../types";
 
 export default function GlissadeInput<T extends string = string>({
+    ref,
     className,
     textareaClassName,
     selectClassName,
@@ -27,6 +28,7 @@ export default function GlissadeInput<T extends string = string>({
         case "textarea":
             return (
                 <textarea
+                    ref={ref as Ref<HTMLTextAreaElement>}
                     className={classNames(className, textareaClassName)}
                     onChange={onChange}
                     rows={rows}
@@ -37,6 +39,7 @@ export default function GlissadeInput<T extends string = string>({
         case "select":
             return (
                 <select
+                    ref={ref as Ref<HTMLSelectElement>}
                     className={classNames(className, selectClassName)}
                     onChange={onChange}
                     {...props}
@@ -57,6 +60,7 @@ export default function GlissadeInput<T extends string = string>({
         default:
             return (
                 <input
+                    ref={ref as Ref<HTMLInputElement>}
                     className={classNames(className, inputClassName)}
                     type={type}
                     onChange={onChange}
