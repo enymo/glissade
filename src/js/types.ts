@@ -48,7 +48,7 @@ export interface GlissadeInputProps<T extends string = string> {
 export interface GlissadeChoiceProps {
     name?: string,
     options?: RegisterOptions,
-    value?: string | number | boolean,
+    value?: string | number | boolean | (string | number | boolean)[],
     error?: string,
     disabled?: boolean,
     checked?: boolean,

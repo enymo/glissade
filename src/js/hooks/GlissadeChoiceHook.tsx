@@ -21,7 +21,18 @@ export default function useGlissadeChoice({
     const disabledContext = useDisabled();
 
     const { onChange: onChangeForm, ...register } = (name && form && !radioListContext && !checkboxListContext) ? form.register(name, disabled ? undefined : options) : { onChange: undefined };
-    
+
+    const checked = useMemo(() => {
+        if (checkedProp !== undefined) return checkedProp;
+        if (typeof value !== "boolean" && checkboxListContext !== undefined) {
+            return Array.isArray(value) ? 
+        }
+        else if (!Array.isArray(value) && radioListContext !== undefined) {
+            return radioListContext.value === value
+        }
+        return false;
+    }, [checkboxListContext?.value, radioListContext?.value, checkedProp, value]);
+
     const checked = useMemo(() => checkedProp ?? ( value !== undefined ? (
         (typeof value !== "boolean" && checkboxListContext?.value.includes(value)) || radioListContext?.value === value
     ) : undefined), [checkboxListContext, radioListContext, checkedProp, value])

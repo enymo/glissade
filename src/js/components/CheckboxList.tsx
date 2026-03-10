@@ -3,9 +3,14 @@ import React, { createContext, useCallback, useContext } from "react";
 import { ErrorProvider } from "../hooks/ErrorContext";
 import { CheckboxListProps } from "../types";
 
+type OnChange = (value: (string | number)[]) => void;
+type Toggle = (name: string | number) => void;
+
 const Context = createContext<{
     value: (string | number)[],
-    toggle: (name: string | number) =>void
+    onChange: OnChange,
+    /** @deprecated */
+    toggle: Toggle
 } | undefined>(undefined);
 
 export const useCheckboxList = () => useContext(Context);
@@ -24,7 +29,7 @@ export default function CheckboxList<T extends string | number>({
     }, [value, onChange])
 
     return (
-        <Context.Provider value={{ value, toggle: handleToggle as any }}>
+        <Context.Provider value={{ value, toggle: handleToggle as Toggle, onChange: onChange as OnChange}}>
             <ErrorProvider value={error}>
                 {children}
             </ErrorProvider>
