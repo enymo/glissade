@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { useCheckboxList } from "../components/CheckboxList";
 import { useRadioGroup } from "../components/RadioGroup";
 import { GlissadeChoiceProps } from "../types";
+import { diff, isSubset } from "../util";
 
 export default function useGlissadeChoice({
     name,
@@ -22,31 +23,43 @@ export default function useGlissadeChoice({
 
     const { onChange: onChangeForm, ...register } = (name && form && !radioListContext && !checkboxListContext) ? form.register(name, disabled ? undefined : options) : { onChange: undefined };
 
-    const checked = useMemo(() => {
-        if (checkedProp !== undefined) return checkedProp;
-        if (typeof value !== "boolean" && checkboxListContext !== undefined) {
-            return Array.isArray(value) ? 
-        }
-        else if (!Array.isArray(value) && radioListContext !== undefined) {
-            return radioListContext.value === value
-        }
-        return false;
-    }, [checkboxListContext?.value, radioListContext?.value, checkedProp, value]);
-
     const checked = useMemo(() => checkedProp ?? ( value !== undefined ? (
-        (typeof value !== "boolean" && checkboxListContext?.value.includes(value)) || radioListContext?.value === value
+        (
+            typeof value !== "boolean" 
+            && checkboxListContext 
+            && (
+                Array.isArray(value) 
+                ? isSubset(value, checkboxListContext.value)
+                : checkboxListContext.value.includes(value)
+            )
+        ) || radioListContext?.value === value
     ) : undefined), [checkboxListContext, radioListContext, checkedProp, value])
 
     const handleChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>(e => {
         onChange?.(e.target.checked);
         if (value !== undefined) {
-            if (typeof value !== "boolean") {
-                checkboxListContext?.toggle(value);
+            if (typeof value !== "boolean" && checkboxListContext) {
+                if (Array.isArray(value)) {
+                    checkboxListContext.onChange(
+                        isSubset(value, checkboxListContext.value) 
+                            ? diff(checkboxListContext.value, value)
+                            : [...checkboxListContext.value, ...diff(value, checkboxListContext.value)]
+                    );
+                }
+                else {
+                    checkboxListContext.onChange(
+                        checkboxListContext.value.includes(value) 
+                        ? checkboxListContext.value.filter(listValue => listValue !== value)
+                        : [...checkboxListContext.value, value]
+                    )
+                }
             }
-            radioListContext?.onChange(value);
+            if (!Array.isArray(value)) {
+                radioListContext?.onChange(value);
+            }
         }
         onChangeForm?.(e);
-    }, [onChange, radioListContext?.onChange, checkboxListContext?.toggle, onChangeForm]);
+    }, [onChange, radioListContext?.onChange, radioListContext?.value, checkboxListContext?.onChange, checkboxListContext?.value, onChangeForm]);
 
     return {
         checked,

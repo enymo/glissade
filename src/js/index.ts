@@ -6,5 +6,5 @@ export { default as useGlissadeButton } from "./hooks/GlissadeButtonHook";
 export { default as useGlissadeChoice } from "./hooks/GlissadeChoiceHook";
 export { default as useGlissadeInput } from "./hooks/GlissadeInputHook";
 export * from "./types";
-export * from "./util";
+export { findToggledElement } from "./util";
 
