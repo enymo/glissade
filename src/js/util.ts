@@ -15,10 +15,10 @@ export function isSubset<T extends string | number>(a: T[], b: T[]) {
     let j = 0;
     while (i < sortedA.length && j < sortedB.length) {
         if (sortedA[i] >= sortedB[j]) {
-            j++;
             if (sortedA[i] === sortedB[j]) {
                 i++;
             }
+            j++;
         }
         else {
             return false;
