@@ -33,6 +33,7 @@ export interface GlissadeInputProps<T extends string = string> {
     name?: string,
     options?: RegisterOptions,
     value?: T,
+    defaultValue?: T,
     onChange?: (value: T) => void,
     onKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
     onKeyUp?: React.KeyboardEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
