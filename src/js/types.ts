@@ -1,5 +1,5 @@
 import type React from "react";
-import { ReactNode, Ref } from "react";
+import { ForwardedRef, ReactNode } from "react";
 import { RegisterOptions } from "react-hook-form";
 
 export interface InputChoiceValue<T extends string> {
@@ -23,7 +23,7 @@ export function isInputChoiceValue<T extends string>(input: InputChoiceValue<T> 
 export type GlissadeInputRef = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
 export interface GlissadeInputProps<T extends string = string> {
-    ref?: Ref<GlissadeInputRef>,
+    ref?: ForwardedRef<GlissadeInputRef>,
     id?: string,
     className?: string,
     textareaClassName?: string,
